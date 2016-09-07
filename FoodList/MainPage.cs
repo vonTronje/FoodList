@@ -8,11 +8,13 @@ namespace FoodList
 		Button addRecipeButton;
 		Entry recipeName;
 		StackLayout panel;
+		StackLayout recipeList;
 
 		public MainPage()
 		{
 			this.Padding = new Thickness(20, Device.OnPlatform(40, 20, 20), 20, 20);
 
+			recipeList = new StackLayout { };
 			panel = new StackLayout
 			{
 				VerticalOptions = LayoutOptions.FillAndExpand,
@@ -37,6 +39,12 @@ namespace FoodList
 				Text = "Add a Recipe"
 			});
 
+			panel.Children.Add(new ScrollView
+			{
+				Content = recipeList
+
+			});
+
 			this.Content = panel;
 
 			addRecipeButton.Clicked += OnAddRecipe;
@@ -44,7 +52,7 @@ namespace FoodList
 
 		private void OnAddRecipe(object sender, EventArgs e)
 		{
-			panel.Children.Add(new Label
+			recipeList.Children.Add(new Label
 			{
 				Text = recipeName.Text
 			});
